@@ -1,0 +1,725 @@
+
+lysoglydkasse.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003e6  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000005a  00800060  000003e6  0000047a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000000a  008000ba  008000ba  000004d4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004d4  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000504  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b8  00000000  00000000  00000540  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a46  00000000  00000000  000005f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000072c  00000000  00000000  0000103e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000006c3  00000000  00000000  0000176a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000188  00000000  00000000  00001e30  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000438  00000000  00000000  00001fb8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000204  00000000  00000000  000023f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000088  00000000  00000000  000025f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	10 c0       	rjmp	.+32     	; 0x22 <__ctors_end>
+   2:	2a c0       	rjmp	.+84     	; 0x58 <__bad_interrupt>
+   4:	29 c0       	rjmp	.+82     	; 0x58 <__bad_interrupt>
+   6:	28 c0       	rjmp	.+80     	; 0x58 <__bad_interrupt>
+   8:	27 c0       	rjmp	.+78     	; 0x58 <__bad_interrupt>
+   a:	26 c0       	rjmp	.+76     	; 0x58 <__bad_interrupt>
+   c:	95 c1       	rjmp	.+810    	; 0x338 <__vector_6>
+   e:	24 c0       	rjmp	.+72     	; 0x58 <__bad_interrupt>
+  10:	23 c0       	rjmp	.+70     	; 0x58 <__bad_interrupt>
+  12:	22 c0       	rjmp	.+68     	; 0x58 <__bad_interrupt>
+  14:	21 c0       	rjmp	.+66     	; 0x58 <__bad_interrupt>
+  16:	2d c1       	rjmp	.+602    	; 0x272 <__vector_11>
+  18:	1f c0       	rjmp	.+62     	; 0x58 <__bad_interrupt>
+  1a:	1e c0       	rjmp	.+60     	; 0x58 <__bad_interrupt>
+  1c:	1d c0       	rjmp	.+58     	; 0x58 <__bad_interrupt>
+  1e:	1c c0       	rjmp	.+56     	; 0x58 <__bad_interrupt>
+  20:	1b c0       	rjmp	.+54     	; 0x58 <__bad_interrupt>
+
+00000022 <__ctors_end>:
+  22:	11 24       	eor	r1, r1
+  24:	1f be       	out	0x3f, r1	; 63
+  26:	cf e5       	ldi	r28, 0x5F	; 95
+  28:	d1 e0       	ldi	r29, 0x01	; 1
+  2a:	de bf       	out	0x3e, r29	; 62
+  2c:	cd bf       	out	0x3d, r28	; 61
+
+0000002e <__do_copy_data>:
+  2e:	10 e0       	ldi	r17, 0x00	; 0
+  30:	a0 e6       	ldi	r26, 0x60	; 96
+  32:	b0 e0       	ldi	r27, 0x00	; 0
+  34:	e6 ee       	ldi	r30, 0xE6	; 230
+  36:	f3 e0       	ldi	r31, 0x03	; 3
+  38:	02 c0       	rjmp	.+4      	; 0x3e <__SP_H__>
+  3a:	05 90       	lpm	r0, Z+
+  3c:	0d 92       	st	X+, r0
+  3e:	aa 3b       	cpi	r26, 0xBA	; 186
+  40:	b1 07       	cpc	r27, r17
+  42:	d9 f7       	brne	.-10     	; 0x3a <__do_copy_data+0xc>
+
+00000044 <__do_clear_bss>:
+  44:	20 e0       	ldi	r18, 0x00	; 0
+  46:	aa eb       	ldi	r26, 0xBA	; 186
+  48:	b0 e0       	ldi	r27, 0x00	; 0
+  4a:	01 c0       	rjmp	.+2      	; 0x4e <.do_clear_bss_start>
+
+0000004c <.do_clear_bss_loop>:
+  4c:	1d 92       	st	X+, r1
+
+0000004e <.do_clear_bss_start>:
+  4e:	a4 3c       	cpi	r26, 0xC4	; 196
+  50:	b2 07       	cpc	r27, r18
+  52:	e1 f7       	brne	.-8      	; 0x4c <.do_clear_bss_loop>
+  54:	ab d1       	rcall	.+854    	; 0x3ac <main>
+  56:	c5 c1       	rjmp	.+906    	; 0x3e2 <_exit>
+
+00000058 <__bad_interrupt>:
+  58:	d3 cf       	rjmp	.-90     	; 0x0 <__vectors>
+
+0000005a <setup_musikk>:
+	cnt = 0;
+	wit = 0;
+	playing = 0;
+	patternplaying = 0;
+	stopTone();
+	sei();
+  5a:	37 d1       	rcall	.+622    	; 0x2ca <setup_lyd>
+  5c:	f8 94       	cli
+  5e:	80 b7       	in	r24, 0x30	; 48
+  60:	83 60       	ori	r24, 0x03	; 3
+  62:	80 bf       	out	0x30, r24	; 48
+  64:	83 b7       	in	r24, 0x33	; 51
+  66:	83 60       	ori	r24, 0x03	; 3
+  68:	83 bf       	out	0x33, r24	; 51
+  6a:	83 b7       	in	r24, 0x33	; 51
+  6c:	83 73       	andi	r24, 0x33	; 51
+  6e:	83 bf       	out	0x33, r24	; 51
+  70:	89 b7       	in	r24, 0x39	; 57
+  72:	81 60       	ori	r24, 0x01	; 1
+  74:	89 bf       	out	0x39, r24	; 57
+  76:	10 92 bf 00 	sts	0x00BF, r1	; 0x8000bf <playerstep>
+  7a:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <playing>
+  7e:	78 94       	sei
+  80:	08 95       	ret
+
+00000082 <restartMusikk>:
+//
+// Starter spilleren fra starten av melodi
+//
+void restartMusikk()
+{
+	cli();
+  82:	f8 94       	cli
+	ptr = 0;
+  84:	10 92 be 00 	sts	0x00BE, r1	; 0x8000be <ptr+0x1>
+  88:	10 92 bd 00 	sts	0x00BD, r1	; 0x8000bd <ptr>
+	cnt = 0;
+  8c:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <cnt+0x1>
+  90:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <cnt>
+	wit = 0;
+  94:	10 92 c1 00 	sts	0x00C1, r1	; 0x8000c1 <wit>
+	playing = 0xFF;
+  98:	8f ef       	ldi	r24, 0xFF	; 255
+  9a:	80 93 c0 00 	sts	0x00C0, r24	; 0x8000c0 <playing>
+	patternplaying = 0x00;
+  9e:	10 92 ba 00 	sts	0x00BA, r1	; 0x8000ba <__data_end>
+	sei();
+  a2:	78 94       	sei
+  a4:	08 95       	ret
+
+000000a6 <restartPattern>:
+}
+
+void restartPattern()
+{
+	cli();
+  a6:	f8 94       	cli
+	ptr = 0;
+  a8:	10 92 be 00 	sts	0x00BE, r1	; 0x8000be <ptr+0x1>
+  ac:	10 92 bd 00 	sts	0x00BD, r1	; 0x8000bd <ptr>
+	cnt = 0;
+  b0:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <cnt+0x1>
+  b4:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <cnt>
+	wit = 0;
+  b8:	10 92 c1 00 	sts	0x00C1, r1	; 0x8000c1 <wit>
+	playing = 0x00;
+  bc:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <playing>
+	patternplaying = 0xFF;
+  c0:	8f ef       	ldi	r24, 0xFF	; 255
+  c2:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <__data_end>
+	sei();
+  c6:	78 94       	sei
+  c8:	08 95       	ret
+
+000000ca <isMusikkPlaying>:
+}
+
+uint8_t isMusikkPlaying()
+{
+	return playing;
+  ca:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <playing>
+}
+  ce:	08 95       	ret
+
+000000d0 <playertikk>:
+
+void playertikk()  // Kalles hver ~60Hz
+{
+  d0:	1f 93       	push	r17
+  d2:	cf 93       	push	r28
+  d4:	df 93       	push	r29
+				playTone(7, 6);
+				ptr++;
+			}
+			else if(melodi[ptr] == '-')
+			{
+				wit = 16;
+  d6:	c0 e1       	ldi	r28, 0x10	; 16
+				stopTone();
+				ptr++;
+			}
+			else if(melodi[ptr] == '.')
+			{
+				wit = 8;
+  d8:	18 e0       	ldi	r17, 0x08	; 8
+	{
+		if(playing)
+		{
+			if(isTone())
+			{
+				wit = 5;
+  da:	d5 e0       	ldi	r29, 0x05	; 5
+	return playing;
+}
+
+void playertikk()  // Kalles hver ~60Hz
+{
+	while(cnt++ >= wit)		// Spiller vi? Er vi klar til neste event?
+  dc:	b5 c0       	rjmp	.+362    	; 0x248 <__stack+0xe9>
+	{
+		if(playing)
+  de:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <playing>
+  e2:	88 23       	and	r24, r24
+  e4:	09 f4       	brne	.+2      	; 0xe8 <playertikk+0x18>
+  e6:	55 c0       	rjmp	.+170    	; 0x192 <__stack+0x33>
+		{
+			if(isTone())
+  e8:	4e d1       	rcall	.+668    	; 0x386 <isTone>
+  ea:	88 23       	and	r24, r24
+  ec:	21 f0       	breq	.+8      	; 0xf6 <playertikk+0x26>
+			{
+				wit = 5;
+  ee:	d0 93 c1 00 	sts	0x00C1, r29	; 0x8000c1 <wit>
+				stopTone();
+  f2:	1f d1       	rcall	.+574    	; 0x332 <stopTone>
+  f4:	4a c0       	rjmp	.+148    	; 0x18a <__stack+0x2b>
+			}
+			else if(melodi[ptr] == ' ')			// tolk og utfï¿½r event
+  f6:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+  fa:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+  fe:	eb 59       	subi	r30, 0x9B	; 155
+ 100:	ff 4f       	sbci	r31, 0xFF	; 255
+ 102:	80 81       	ld	r24, Z
+ 104:	80 32       	cpi	r24, 0x20	; 32
+ 106:	69 f4       	brne	.+26     	; 0x122 <playertikk+0x52>
+			{
+				wit = 16;
+ 108:	c0 93 c1 00 	sts	0x00C1, r28	; 0x8000c1 <wit>
+				stopTone();
+ 10c:	12 d1       	rcall	.+548    	; 0x332 <stopTone>
+				ptr++;
+ 10e:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 112:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 116:	01 96       	adiw	r24, 0x01	; 1
+ 118:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 11c:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 120:	34 c0       	rjmp	.+104    	; 0x18a <__stack+0x2b>
+			}
+			else if(melodi[ptr] == '.')
+ 122:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+ 126:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+ 12a:	eb 59       	subi	r30, 0x9B	; 155
+ 12c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 12e:	80 81       	ld	r24, Z
+ 130:	8e 32       	cpi	r24, 0x2E	; 46
+ 132:	79 f4       	brne	.+30     	; 0x152 <playertikk+0x82>
+			{
+				wit = 8;
+ 134:	10 93 c1 00 	sts	0x00C1, r17	; 0x8000c1 <wit>
+				playTone(7, 6);
+ 138:	66 e0       	ldi	r22, 0x06	; 6
+ 13a:	87 e0       	ldi	r24, 0x07	; 7
+ 13c:	de d0       	rcall	.+444    	; 0x2fa <playTone>
+				ptr++;
+ 13e:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 142:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 146:	01 96       	adiw	r24, 0x01	; 1
+ 148:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 14c:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 150:	1c c0       	rjmp	.+56     	; 0x18a <__stack+0x2b>
+			}
+			else if(melodi[ptr] == '-')
+ 152:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+ 156:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+ 15a:	eb 59       	subi	r30, 0x9B	; 155
+ 15c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 15e:	80 81       	ld	r24, Z
+ 160:	8d 32       	cpi	r24, 0x2D	; 45
+ 162:	79 f4       	brne	.+30     	; 0x182 <__stack+0x23>
+			{
+				wit = 16;
+ 164:	c0 93 c1 00 	sts	0x00C1, r28	; 0x8000c1 <wit>
+				playTone(7, 6);
+ 168:	66 e0       	ldi	r22, 0x06	; 6
+ 16a:	87 e0       	ldi	r24, 0x07	; 7
+ 16c:	c6 d0       	rcall	.+396    	; 0x2fa <playTone>
+				ptr++;
+ 16e:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 172:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 176:	01 96       	adiw	r24, 0x01	; 1
+ 178:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 17c:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 180:	04 c0       	rjmp	.+8      	; 0x18a <__stack+0x2b>
+			}
+			else
+			{
+				stopTone();
+ 182:	d7 d0       	rcall	.+430    	; 0x332 <stopTone>
+				playing = 0;
+ 184:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <playing>
+				break;
+ 188:	70 c0       	rjmp	.+224    	; 0x26a <__stack+0x10b>
+			}
+			cnt = 0;
+ 18a:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <cnt+0x1>
+ 18e:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <cnt>
+		}
+		if(patternplaying)
+ 192:	80 91 ba 00 	lds	r24, 0x00BA	; 0x8000ba <__data_end>
+ 196:	88 23       	and	r24, r24
+ 198:	09 f4       	brne	.+2      	; 0x19c <__stack+0x3d>
+ 19a:	56 c0       	rjmp	.+172    	; 0x248 <__stack+0xe9>
+		{
+			if(isTone())
+ 19c:	f4 d0       	rcall	.+488    	; 0x386 <isTone>
+ 19e:	88 23       	and	r24, r24
+ 1a0:	21 f0       	breq	.+8      	; 0x1aa <__stack+0x4b>
+			{
+				wit = 5;
+ 1a2:	d0 93 c1 00 	sts	0x00C1, r29	; 0x8000c1 <wit>
+				stopTone();
+ 1a6:	c5 d0       	rcall	.+394    	; 0x332 <stopTone>
+ 1a8:	4b c0       	rjmp	.+150    	; 0x240 <__stack+0xe1>
+			}
+			else if(pattern[ptr] == ' ')			// tolk og utfï¿½r event
+ 1aa:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+ 1ae:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+ 1b2:	e0 5a       	subi	r30, 0xA0	; 160
+ 1b4:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1b6:	80 81       	ld	r24, Z
+ 1b8:	80 32       	cpi	r24, 0x20	; 32
+ 1ba:	69 f4       	brne	.+26     	; 0x1d6 <__stack+0x77>
+			{
+				wit = 16;
+ 1bc:	c0 93 c1 00 	sts	0x00C1, r28	; 0x8000c1 <wit>
+				stopTone();
+ 1c0:	b8 d0       	rcall	.+368    	; 0x332 <stopTone>
+				ptr++;
+ 1c2:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 1c6:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 1ca:	01 96       	adiw	r24, 0x01	; 1
+ 1cc:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 1d0:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 1d4:	35 c0       	rjmp	.+106    	; 0x240 <__stack+0xe1>
+			}
+			else if(pattern[ptr] == '.')
+ 1d6:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+ 1da:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+ 1de:	e0 5a       	subi	r30, 0xA0	; 160
+ 1e0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1e2:	80 81       	ld	r24, Z
+ 1e4:	8e 32       	cpi	r24, 0x2E	; 46
+ 1e6:	79 f4       	brne	.+30     	; 0x206 <__stack+0xa7>
+			{
+				wit = 8;
+ 1e8:	10 93 c1 00 	sts	0x00C1, r17	; 0x8000c1 <wit>
+				playTone(7, 6);
+ 1ec:	66 e0       	ldi	r22, 0x06	; 6
+ 1ee:	87 e0       	ldi	r24, 0x07	; 7
+ 1f0:	84 d0       	rcall	.+264    	; 0x2fa <playTone>
+				ptr++;
+ 1f2:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 1f6:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 1fa:	01 96       	adiw	r24, 0x01	; 1
+ 1fc:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 200:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 204:	1d c0       	rjmp	.+58     	; 0x240 <__stack+0xe1>
+			}
+			else if(pattern[ptr] == '-')
+ 206:	e0 91 bd 00 	lds	r30, 0x00BD	; 0x8000bd <ptr>
+ 20a:	f0 91 be 00 	lds	r31, 0x00BE	; 0x8000be <ptr+0x1>
+ 20e:	e0 5a       	subi	r30, 0xA0	; 160
+ 210:	ff 4f       	sbci	r31, 0xFF	; 255
+ 212:	80 81       	ld	r24, Z
+ 214:	8d 32       	cpi	r24, 0x2D	; 45
+ 216:	79 f4       	brne	.+30     	; 0x236 <__stack+0xd7>
+			{
+				wit = 16;
+ 218:	c0 93 c1 00 	sts	0x00C1, r28	; 0x8000c1 <wit>
+				playTone(0, 7);
+ 21c:	67 e0       	ldi	r22, 0x07	; 7
+ 21e:	80 e0       	ldi	r24, 0x00	; 0
+ 220:	6c d0       	rcall	.+216    	; 0x2fa <playTone>
+				ptr++;
+ 222:	80 91 bd 00 	lds	r24, 0x00BD	; 0x8000bd <ptr>
+ 226:	90 91 be 00 	lds	r25, 0x00BE	; 0x8000be <ptr+0x1>
+ 22a:	01 96       	adiw	r24, 0x01	; 1
+ 22c:	90 93 be 00 	sts	0x00BE, r25	; 0x8000be <ptr+0x1>
+ 230:	80 93 bd 00 	sts	0x00BD, r24	; 0x8000bd <ptr>
+ 234:	05 c0       	rjmp	.+10     	; 0x240 <__stack+0xe1>
+			}
+			else
+			{
+				ptr = 0;
+ 236:	10 92 be 00 	sts	0x00BE, r1	; 0x8000be <ptr+0x1>
+ 23a:	10 92 bd 00 	sts	0x00BD, r1	; 0x8000bd <ptr>
+				break;
+ 23e:	15 c0       	rjmp	.+42     	; 0x26a <__stack+0x10b>
+			}
+			cnt = 0;
+ 240:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <cnt+0x1>
+ 244:	10 92 bb 00 	sts	0x00BB, r1	; 0x8000bb <cnt>
+	return playing;
+}
+
+void playertikk()  // Kalles hver ~60Hz
+{
+	while(cnt++ >= wit)		// Spiller vi? Er vi klar til neste event?
+ 248:	20 91 bb 00 	lds	r18, 0x00BB	; 0x8000bb <cnt>
+ 24c:	30 91 bc 00 	lds	r19, 0x00BC	; 0x8000bc <cnt+0x1>
+ 250:	c9 01       	movw	r24, r18
+ 252:	01 96       	adiw	r24, 0x01	; 1
+ 254:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <cnt+0x1>
+ 258:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <cnt>
+ 25c:	80 91 c1 00 	lds	r24, 0x00C1	; 0x8000c1 <wit>
+ 260:	90 e0       	ldi	r25, 0x00	; 0
+ 262:	28 17       	cp	r18, r24
+ 264:	39 07       	cpc	r19, r25
+ 266:	08 f0       	brcs	.+2      	; 0x26a <__stack+0x10b>
+ 268:	3a cf       	rjmp	.-396    	; 0xde <playertikk+0xe>
+				break;
+			}
+			cnt = 0;
+		}
+	}
+ 26a:	df 91       	pop	r29
+ 26c:	cf 91       	pop	r28
+ 26e:	1f 91       	pop	r17
+ 270:	08 95       	ret
+
+00000272 <__vector_11>:
+	sei();
+}
+
+
+ISR(TIM0_OVF_vect)  // Trigges ~240Hz
+{
+ 272:	1f 92       	push	r1
+ 274:	0f 92       	push	r0
+ 276:	0f b6       	in	r0, 0x3f	; 63
+ 278:	0f 92       	push	r0
+ 27a:	11 24       	eor	r1, r1
+ 27c:	2f 93       	push	r18
+ 27e:	3f 93       	push	r19
+ 280:	4f 93       	push	r20
+ 282:	5f 93       	push	r21
+ 284:	6f 93       	push	r22
+ 286:	7f 93       	push	r23
+ 288:	8f 93       	push	r24
+ 28a:	9f 93       	push	r25
+ 28c:	af 93       	push	r26
+ 28e:	bf 93       	push	r27
+ 290:	ef 93       	push	r30
+ 292:	ff 93       	push	r31
+	sei();
+ 294:	78 94       	sei
+	if(!((playerstep++)&0x03)) // triggers ~30Hz
+ 296:	80 91 bf 00 	lds	r24, 0x00BF	; 0x8000bf <playerstep>
+ 29a:	91 e0       	ldi	r25, 0x01	; 1
+ 29c:	98 0f       	add	r25, r24
+ 29e:	90 93 bf 00 	sts	0x00BF, r25	; 0x8000bf <playerstep>
+ 2a2:	83 70       	andi	r24, 0x03	; 3
+ 2a4:	09 f4       	brne	.+2      	; 0x2a8 <__vector_11+0x36>
+	{
+		playertikk();
+ 2a6:	14 df       	rcall	.-472    	; 0xd0 <playertikk>
+	}
+	
+}
+ 2a8:	ff 91       	pop	r31
+ 2aa:	ef 91       	pop	r30
+ 2ac:	bf 91       	pop	r27
+ 2ae:	af 91       	pop	r26
+ 2b0:	9f 91       	pop	r25
+ 2b2:	8f 91       	pop	r24
+ 2b4:	7f 91       	pop	r23
+ 2b6:	6f 91       	pop	r22
+ 2b8:	5f 91       	pop	r21
+ 2ba:	4f 91       	pop	r20
+ 2bc:	3f 91       	pop	r19
+ 2be:	2f 91       	pop	r18
+ 2c0:	0f 90       	pop	r0
+ 2c2:	0f be       	out	0x3f, r0	; 63
+ 2c4:	0f 90       	pop	r0
+ 2c6:	1f 90       	pop	r1
+ 2c8:	18 95       	reti
+
+000002ca <setup_lyd>:
+//
+const uint_fast16_t scale[] = {61156, 57724, 54484, 51426, 48540, 45815, 43244, 40817, 38526, 36364, 34323, 32396};
+
+void setup_lyd()
+{
+	cli();
+ 2ca:	f8 94       	cli
+	DDRA |= (1<<PINA7);						// Output pin for speaker (for software timer)
+ 2cc:	d7 9a       	sbi	0x1a, 7	; 26
+	TCCR1A &= ~((1<<WGM11) | (1<<WGM10));	// Clear on Compare mode
+ 2ce:	8f b5       	in	r24, 0x2f	; 47
+ 2d0:	8c 7f       	andi	r24, 0xFC	; 252
+ 2d2:	8f bd       	out	0x2f, r24	; 47
+	TCCR1B |= (1<<CS11) | (1<<WGM12);		// Prescaler
+ 2d4:	8e b5       	in	r24, 0x2e	; 46
+ 2d6:	8a 60       	ori	r24, 0x0A	; 10
+ 2d8:	8e bd       	out	0x2e, r24	; 46
+	TCCR1B &= ~((1<<WGM13));
+ 2da:	8e b5       	in	r24, 0x2e	; 46
+ 2dc:	8f 7e       	andi	r24, 0xEF	; 239
+ 2de:	8e bd       	out	0x2e, r24	; 46
+	TIMSK1 |= (1<<OCIE1A);					// Enable interrupts
+ 2e0:	61 9a       	sbi	0x0c, 1	; 12
+
+	TCNT1 = 0;								//Preset all Values
+ 2e2:	1d bc       	out	0x2d, r1	; 45
+ 2e4:	1c bc       	out	0x2c, r1	; 44
+	OCR1A = 0xFFFF;
+ 2e6:	8f ef       	ldi	r24, 0xFF	; 255
+ 2e8:	9f ef       	ldi	r25, 0xFF	; 255
+ 2ea:	9b bd       	out	0x2b, r25	; 43
+ 2ec:	8a bd       	out	0x2a, r24	; 42
+	soundstep = 0;
+ 2ee:	10 92 c2 00 	sts	0x00C2, r1	; 0x8000c2 <soundstep>
+	play = 0;
+ 2f2:	10 92 c3 00 	sts	0x00C3, r1	; 0x8000c3 <play>
+	sei();	
+ 2f6:	78 94       	sei
+ 2f8:	08 95       	ret
+
+000002fa <playTone>:
+
+//
+// Spill en tone
+//
+void playTone(uint8_t tone, uint8_t oktav)
+{
+ 2fa:	26 2f       	mov	r18, r22
+	OCR1A = scale[tone%12]>>(oktav%10);
+ 2fc:	6c e0       	ldi	r22, 0x0C	; 12
+ 2fe:	65 d0       	rcall	.+202    	; 0x3ca <__udivmodqi4>
+ 300:	e9 2f       	mov	r30, r25
+ 302:	f0 e0       	ldi	r31, 0x00	; 0
+ 304:	ee 0f       	add	r30, r30
+ 306:	ff 1f       	adc	r31, r31
+ 308:	ee 55       	subi	r30, 0x5E	; 94
+ 30a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 30c:	82 2f       	mov	r24, r18
+ 30e:	6a e0       	ldi	r22, 0x0A	; 10
+ 310:	5c d0       	rcall	.+184    	; 0x3ca <__udivmodqi4>
+ 312:	29 2f       	mov	r18, r25
+ 314:	80 81       	ld	r24, Z
+ 316:	91 81       	ldd	r25, Z+1	; 0x01
+ 318:	02 c0       	rjmp	.+4      	; 0x31e <playTone+0x24>
+ 31a:	96 95       	lsr	r25
+ 31c:	87 95       	ror	r24
+ 31e:	2a 95       	dec	r18
+ 320:	e2 f7       	brpl	.-8      	; 0x31a <playTone+0x20>
+ 322:	9b bd       	out	0x2b, r25	; 43
+ 324:	8a bd       	out	0x2a, r24	; 42
+	TCNT1 = 0;
+ 326:	1d bc       	out	0x2d, r1	; 45
+ 328:	1c bc       	out	0x2c, r1	; 44
+	play = 0xFF;
+ 32a:	8f ef       	ldi	r24, 0xFF	; 255
+ 32c:	80 93 c3 00 	sts	0x00C3, r24	; 0x8000c3 <play>
+ 330:	08 95       	ret
+
+00000332 <stopTone>:
+//
+// Stopp spillende tone
+//
+void stopTone()
+{
+	play = 0;
+ 332:	10 92 c3 00 	sts	0x00C3, r1	; 0x8000c3 <play>
+ 336:	08 95       	ret
+
+00000338 <__vector_6>:
+
+//
+// Software-toggle av høytaler
+//
+ISR(TIM1_COMPA_vect)
+{
+ 338:	1f 92       	push	r1
+ 33a:	0f 92       	push	r0
+ 33c:	0f b6       	in	r0, 0x3f	; 63
+ 33e:	0f 92       	push	r0
+ 340:	11 24       	eor	r1, r1
+ 342:	8f 93       	push	r24
+ 344:	9f 93       	push	r25
+	if(play)
+ 346:	80 91 c3 00 	lds	r24, 0x00C3	; 0x8000c3 <play>
+ 34a:	88 23       	and	r24, r24
+ 34c:	61 f0       	breq	.+24     	; 0x366 <__vector_6+0x2e>
+		PORTA |= (((soundstep++)&0x01)<<PINA7);
+ 34e:	80 91 c2 00 	lds	r24, 0x00C2	; 0x8000c2 <soundstep>
+ 352:	91 e0       	ldi	r25, 0x01	; 1
+ 354:	98 0f       	add	r25, r24
+ 356:	90 93 c2 00 	sts	0x00C2, r25	; 0x8000c2 <soundstep>
+ 35a:	9b b3       	in	r25, 0x1b	; 27
+ 35c:	87 95       	ror	r24
+ 35e:	88 27       	eor	r24, r24
+ 360:	87 95       	ror	r24
+ 362:	89 2b       	or	r24, r25
+ 364:	8b bb       	out	0x1b, r24	; 27
+	PORTA &= ~((soundstep&0x01)<<PINA7);
+ 366:	80 91 c2 00 	lds	r24, 0x00C2	; 0x8000c2 <soundstep>
+ 36a:	9b b3       	in	r25, 0x1b	; 27
+ 36c:	87 95       	ror	r24
+ 36e:	88 27       	eor	r24, r24
+ 370:	87 95       	ror	r24
+ 372:	80 95       	com	r24
+ 374:	89 23       	and	r24, r25
+ 376:	8b bb       	out	0x1b, r24	; 27
+}
+ 378:	9f 91       	pop	r25
+ 37a:	8f 91       	pop	r24
+ 37c:	0f 90       	pop	r0
+ 37e:	0f be       	out	0x3f, r0	; 63
+ 380:	0f 90       	pop	r0
+ 382:	1f 90       	pop	r1
+ 384:	18 95       	reti
+
+00000386 <isTone>:
+
+uint8_t isTone()
+{
+	return play;
+ 386:	80 91 c3 00 	lds	r24, 0x00C3	; 0x8000c3 <play>
+}
+ 38a:	08 95       	ret
+
+0000038c <delay_sek>:
+
+#include "musikk.h"
+
+void delay_sek(uint8_t t)
+{
+	for(uint8_t i=0; i<t; i++)
+ 38c:	88 23       	and	r24, r24
+ 38e:	69 f0       	breq	.+26     	; 0x3aa <delay_sek+0x1e>
+ 390:	90 e0       	ldi	r25, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 392:	2f ef       	ldi	r18, 0xFF	; 255
+ 394:	39 e6       	ldi	r19, 0x69	; 105
+ 396:	48 e1       	ldi	r20, 0x18	; 24
+ 398:	21 50       	subi	r18, 0x01	; 1
+ 39a:	30 40       	sbci	r19, 0x00	; 0
+ 39c:	40 40       	sbci	r20, 0x00	; 0
+ 39e:	e1 f7       	brne	.-8      	; 0x398 <delay_sek+0xc>
+ 3a0:	00 c0       	rjmp	.+0      	; 0x3a2 <delay_sek+0x16>
+ 3a2:	00 00       	nop
+ 3a4:	9f 5f       	subi	r25, 0xFF	; 255
+ 3a6:	89 13       	cpse	r24, r25
+ 3a8:	f4 cf       	rjmp	.-24     	; 0x392 <delay_sek+0x6>
+ 3aa:	08 95       	ret
+
+000003ac <main>:
+int main(void)
+{
+	//
+	// Setup
+	//
+	setup_musikk();
+ 3ac:	56 de       	rcall	.-852    	; 0x5a <setup_musikk>
+	//
+	// Do stuff
+	//
+    while (1) 
+    {
+		restartMusikk();
+ 3ae:	69 de       	rcall	.-814    	; 0x82 <restartMusikk>
+		while(isMusikkPlaying());
+ 3b0:	8c de       	rcall	.-744    	; 0xca <isMusikkPlaying>
+ 3b2:	81 11       	cpse	r24, r1
+ 3b4:	fd cf       	rjmp	.-6      	; 0x3b0 <main+0x4>
+		restartPattern();
+ 3b6:	77 de       	rcall	.-786    	; 0xa6 <restartPattern>
+		delay_sek(25);
+ 3b8:	89 e1       	ldi	r24, 0x19	; 25
+ 3ba:	e8 df       	rcall	.-48     	; 0x38c <delay_sek>
+		restartMusikk();
+ 3bc:	62 de       	rcall	.-828    	; 0x82 <restartMusikk>
+		while(isMusikkPlaying());
+ 3be:	85 de       	rcall	.-758    	; 0xca <isMusikkPlaying>
+ 3c0:	81 11       	cpse	r24, r1
+ 3c2:	fd cf       	rjmp	.-6      	; 0x3be <main+0x12>
+		delay_sek(60);
+ 3c4:	8c e3       	ldi	r24, 0x3C	; 60
+ 3c6:	e2 df       	rcall	.-60     	; 0x38c <delay_sek>
+    }
+ 3c8:	f2 cf       	rjmp	.-28     	; 0x3ae <main+0x2>
+
+000003ca <__udivmodqi4>:
+ 3ca:	99 1b       	sub	r25, r25
+ 3cc:	79 e0       	ldi	r23, 0x09	; 9
+ 3ce:	04 c0       	rjmp	.+8      	; 0x3d8 <__udivmodqi4_ep>
+
+000003d0 <__udivmodqi4_loop>:
+ 3d0:	99 1f       	adc	r25, r25
+ 3d2:	96 17       	cp	r25, r22
+ 3d4:	08 f0       	brcs	.+2      	; 0x3d8 <__udivmodqi4_ep>
+ 3d6:	96 1b       	sub	r25, r22
+
+000003d8 <__udivmodqi4_ep>:
+ 3d8:	88 1f       	adc	r24, r24
+ 3da:	7a 95       	dec	r23
+ 3dc:	c9 f7       	brne	.-14     	; 0x3d0 <__udivmodqi4_loop>
+ 3de:	80 95       	com	r24
+ 3e0:	08 95       	ret
+
+000003e2 <_exit>:
+ 3e2:	f8 94       	cli
+
+000003e4 <__stop_program>:
+ 3e4:	ff cf       	rjmp	.-2      	; 0x3e4 <__stop_program>

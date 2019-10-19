@@ -1,0 +1,5 @@
+This project uses customized code from the Lys-og-Lyd box project.
+
+The microcontroller is an ATTiny84, using one pin to gate a radio transmitter module.
+Remember to change the morse-code string in "melod[]" of "music.c". To use this, the
+string must contain your amateur radio callsign.
